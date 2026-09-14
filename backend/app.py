@@ -6,6 +6,7 @@ from werkzeug.exceptions import HTTPException
 from openai import APIError, APIConnectionError, APITimeoutError, AuthenticationError, RateLimitError
 from backend.errors import AppError
 from backend.services import TranslationService
+from backend.files import UploadValidator, DocumentExtractor
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +31,8 @@ def create_app(service=None):
     app = Flask(__name__, static_folder=None)
     app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024
     translator = service or TranslationService()
+    uploads = UploadValidator()
+    documents = DocumentExtractor()
 
     @app.before_request
     def protect():
@@ -106,6 +109,35 @@ def create_app(service=None):
         if sum(len(x['original']) + len(x['translation']) for x in clean) > 24000:
             raise AppError('El contexto de conversación es demasiado largo.', 413)
         return jsonify(translator.translate(text, source, target, clean))
+
+    @app.post('/api/documents')
+    def document():
+        source, target = languages(request.form)
+        data, extension = uploads.read(request.files.get('file'), 'documents')
+        sections = documents.extract(data, extension)
+        results = [translator.translate(text, source, target) for text in sections]
+        return jsonify(sections=results, source=source, target=target)
+
+    @app.post('/api/transcribe')
+    def transcribe():
+        source, target = languages(request.form)
+        data, extension = uploads.read(request.files.get('file'), 'audio')
+        return jsonify(original=translator.transcribe(data, extension, source), source=source, target=target)
+
+    @app.post('/api/translate')
+    def translate():
+        data = request.get_json()
+        if not isinstance(data, dict):
+            raise AppError('La solicitud debe ser un objeto JSON.')
+        source, target = languages(data)
+        return jsonify(translator.translate(text_input(data, 12000), source, target))
+
+    @app.post('/api/speech')
+    def speech():
+        data = request.get_json()
+        if not isinstance(data, dict):
+            raise AppError('La solicitud debe ser un objeto JSON.')
+        return jsonify(translator.speech(text_input(data, 12000)))
 
     @app.get('/')
     def home():

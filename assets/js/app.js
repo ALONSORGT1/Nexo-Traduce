@@ -1,10 +1,12 @@
 import { ApiClient } from './api.js';
 import { ChatController } from './chat.js';
+import { FileController } from './files.js';
 
 const api = new ApiClient();
 const status = document.querySelector('#status');
 export function notify(text, error = false) { status.textContent = text; status.classList.toggle('error', error); }
 new ChatController(api, notify);
+const files = new FileController(api, notify);
 
 const dialog = document.querySelector('#connectionDialog');
 document.querySelector('#connectionButton').addEventListener('click', () => {
@@ -30,5 +32,13 @@ document.querySelector('#connectionForm').addEventListener('submit', async event
 });
 
 document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
-  if (button.dataset.mode !== 'chat') { notify('Este módulo se está preparando.'); return; }
+  const mode = button.dataset.mode;
+  if (files.busy || files.recording) { notify('Espera a que termine la operación actual.', true); return; }
+  if (mode !== 'chat' && !files.setMode(mode)) return;
+  document.querySelectorAll('[data-mode]').forEach(x => { x.classList.toggle('active', x === button); x.removeAttribute('aria-current'); });
+  button.setAttribute('aria-current', 'page');
+  document.querySelector('#chatPanel').hidden = mode !== 'chat';
+  document.querySelector('#filePanel').hidden = mode === 'chat';
+  document.querySelector('#pageTitle').textContent = { chat: 'Conversación', audio: 'Audio', documents: 'Documentos', images: 'Imágenes' }[mode];
+  notify('Listo para conectar ideas.');
 }));
