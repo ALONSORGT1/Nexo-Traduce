@@ -1,7 +1,8 @@
 import hmac
 import os
+import io
 from pathlib import Path
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, Request, jsonify, request, send_from_directory
 from werkzeug.exceptions import HTTPException
 from openai import APIError, APIConnectionError, APITimeoutError, AuthenticationError, RateLimitError
 from backend.errors import AppError
@@ -9,6 +10,11 @@ from backend.services import TranslationService
 from backend.files import UploadValidator, DocumentExtractor
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+class MemoryRequest(Request):
+    def _get_file_stream(self, total_content_length, content_type, filename=None, content_length=None):
+        return io.BytesIO()
 
 
 def languages(data):
@@ -29,6 +35,7 @@ def text_input(data, maximum=6000):
 
 def create_app(service=None):
     app = Flask(__name__, static_folder=None)
+    app.request_class = MemoryRequest
     app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024
     translator = service or TranslationService()
     uploads = UploadValidator()

@@ -1,0 +1,9 @@
+.git
+.venv
+.env*
+!.env.example
+tmp
+artifacts
+tests
+docs
+.github
