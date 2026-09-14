@@ -35,6 +35,6 @@ Los archivos de prueba reales están en `tmp/`, fuera del repositorio. No se usa
 
 ## Publicación
 
-Repositorio creado y commits progresivos subidos. GitHub Pages configurado para GitHub Actions. La primera ejecución de publicación se inició antes de habilitar Pages; pruebas aprobadas, configuración de Pages fallida. Se vuelve a publicar con el siguiente commit una vez habilitado Pages.
+Repositorio creado y commits progresivos subidos. GitHub Pages configurado para GitHub Actions. La primera ejecución de publicación se inició antes de habilitar Pages; posteriormente se configuró Pages y el commit `2b14e2a` pasó tanto pruebas como publicación. Frontend: https://alonsorgt1.github.io/Nexo-Traduce/.
 
 Vercel exige conceder a su integración existente acceso al repositorio nuevo. GitHub solicita verificación de identidad del propietario para ese cambio; pendiente de completar por el propietario. Hasta conectar y desplegar el backend, la aplicación funciona localmente con `scripts/serve.py`.

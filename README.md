@@ -7,7 +7,7 @@ Permite que personas de México y Estados Unidos compartan mensajes, voz, docume
 ## Acceso
 
 - Repositorio: https://github.com/ALONSORGT1/Nexo-Traduce
-- Frontend: publicación en GitHub Pages en preparación.
+- Frontend publicado: https://alonsorgt1.github.io/Nexo-Traduce/ (backend público pendiente de conectar).
 - Backend: publicación en Vercel en preparación.
 
 ## Funciones
@@ -97,7 +97,7 @@ Los MP4/M4A deben contener voz. La cabecera se valida localmente y OpenAI valida
 ## Publicar
 
 1. Crea un repositorio y sube la rama `main`. El historial debe conservar los commits progresivos.
-2. Importa el repositorio en Vercel. `api/index.py` expone Flask y `vercel.json` dirige `/api/*` a la función. Configura Python 3.12 si el panel solicita versión.
+2. Importa el repositorio en Vercel. `app.py` expone Flask y `vercel.json` selecciona el preset Flask: la aplicación controla todas las rutas y sirve solo el HTML y los assets autorizados. `.python-version` fija Python 3.12. No se requiere comando de compilación. Referencia: [Python en Vercel](https://vercel.com/docs/functions/runtimes/python).
 3. En Vercel configura `OPENAI_API_KEY` y `ALLOWED_ORIGINS=https://alonsorgt1.github.io,https://TU-BACKEND.vercel.app`. Añade localhost si se necesita. Configura opcionalmente `APP_ACCESS_CODE`.
 4. Escribe la URL pública del backend en `assets/js/config.js`; nunca escribas claves allí. Para pruebas se puede cambiar la dirección temporalmente desde **Conexión**.
 5. En GitHub → Settings → Pages elige GitHub Actions. `.github/workflows/pages.yml` ejecuta pruebas y publica exclusivamente `index.html` y `assets/`.
