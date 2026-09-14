@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#f6f7f3">
+  <meta name="description" content="Nexo Traduce: conversaciones, voz, documentos e imágenes entre español e inglés.">
+  <title>Nexo Traduce — Entendernos nos acerca</title>
+  <script src="assets/js/theme.js"></script>
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="Nexo Traduce, inicio"><span class="brand-mark">n✳</span>nexo<span class="brand-dot">.</span></a>
+    <p class="sidebar-caption">UN MISMO MUNDO. DOS IDIOMAS.</p>
+    <button id="clearChat" class="new-chat">＋ Nueva conversación</button>
+    <div class="nav-label">TU ESPACIO DE TRADUCCIÓN</div>
+    <nav class="mode-nav" aria-label="Modalidades">
+      <button class="mode-button active" data-mode="chat" aria-current="page"><span aria-hidden="true">◌</span> Conversación <span class="nav-dot"></span></button>
+      <button class="mode-button" data-mode="audio"><span aria-hidden="true">≋</span> Audio</button>
+      <button class="mode-button" data-mode="documents"><span aria-hidden="true">▤</span> Documentos</button>
+      <button class="mode-button" data-mode="images"><span aria-hidden="true">▧</span> Imágenes</button>
+    </nav>
+    <div class="sidebar-note"><span class="note-symbol" aria-hidden="true">✳</span><h2>Las palabras cambian.<br>Las ideas conectan.</h2><p>Habla, escribe o comparte.<br>Encontrémonos en el mismo idioma.</p><span class="language-chip">ES <span>↔</span> EN</span></div>
+    <footer class="sidebar-footer"><span class="avatar">AR</span><div>Alonso Ramírez G.<small>IA aplicada a las TIC · ITP</small></div></footer>
+  </aside>
+  <main id="main" class="workspace">
+    <header class="topbar">
+      <div class="topbar-title"><span class="mobile-brand">nexo.</span><span id="pageTitle">Conversación</span><span class="tag">TRADUCE</span></div>
+      <div class="header-actions"><button id="connectionButton" class="quiet-button" title="Configurar conexión">◎ <span>Conexión</span></button><button id="themeToggle" class="quiet-button" aria-label="Activar modo oscuro">◐</button></div>
+    </header>
+    <div class="content-area">
+      <section id="chatPanel" class="mode-panel" aria-label="Conversación bilingüe">
+        <div class="chat-toolbar"><span><span class="live-dot"></span> Dos participantes · una conversación</span><button id="exportChat" class="quiet-button" disabled>↓ Exportar</button></div>
+        <div class="chat-scroll">
+          <section id="welcome" class="welcome">
+            <div class="eyebrow"><span></span> MENOS BARRERAS, MÁS CONVERSACIÓN</div>
+            <h1>Entendernos<br><em>nos acerca.</em></h1>
+            <p>Tu mensaje, en el idioma de la otra persona.<br>Un espacio para conectar en español e inglés.</p>
+            <div class="welcome-symbol" aria-hidden="true"><span>Hola<span class="symbol-dot">.</span></span><span class="symbol-arrow">↗</span><span>Hello<span class="symbol-dot">.</span></span></div>
+            <div class="suggestion-grid"><button data-example="Hola, ¿podemos reunirnos mañana a las diez?">Coordina una reunión <span>↗</span></button><button data-example="Gracias por tu ayuda. Te enviaré el documento esta tarde.">Comparte una idea <span>↗</span></button></div>
+          </section>
+          <div id="chatLog" role="log" aria-label="Mensajes originales y traducidos" aria-live="polite"></div>
+        </div>
+        <form id="chatForm" class="composer">
+          <div class="composer-meta"><label for="speaker">Escribe como</label><select id="speaker"><option value="es">Participante 1 · Español</option><option value="en">Participant 2 · English</option></select><span id="chatDirection" class="direction-label">Español → Inglés</span></div>
+          <label class="visually-hidden" for="message">Mensaje para traducir</label><textarea id="message" rows="3" maxlength="6000" placeholder="Escribe en español para la otra persona…"></textarea>
+          <div class="composer-bottom"><span id="counter">0 / 6000</span><button type="submit" id="sendMessage" class="primary-button">Traducir ↗</button></div>
+        </form>
+      </section>
+      <section id="filePanel" class="mode-panel file-panel" hidden aria-labelledby="fileTitle">
+        <div class="file-heading"><div class="eyebrow">OTRA FORMA DE ENTENDERNOS</div><h1 id="fileTitle">Dale voz a tus ideas.</h1><p id="fileDescription"></p></div>
+        <div class="language-bar"><label for="sourceLanguage">De</label><select id="sourceLanguage"><option value="es">Español</option><option value="en">English</option></select><button id="swapLanguages" class="quiet-button" aria-label="Intercambiar idiomas">⇄</button><span> a </span><strong id="targetLanguage">English</strong></div>
+        <form id="fileForm">
+          <label class="upload-zone" id="dropzone" for="fileInput"><span class="upload-symbol" aria-hidden="true">↑</span><strong id="uploadTitle">Selecciona o arrastra tu archivo</strong><span id="fileFormats"></span><input id="fileInput" type="file"></label>
+          <div id="selectedFile" class="selected-file" hidden><span id="fileName"></span><button type="button" id="removeFile" class="quiet-button">Quitar ×</button></div>
+          <audio id="sourceAudio" controls hidden aria-label="Audio original"></audio>
+          <div id="audioTools" class="audio-tools"><span>¿Prefieres hablar?</span><button id="recordButton" type="button" class="secondary-button">● Grabar audio</button><span id="recordStatus" role="status"></span></div>
+          <div id="imageOptions" hidden><p class="small-note">Primero traduciremos el texto. Después podrás generar una versión de la imagen con la traducción.</p></div>
+          <div class="file-submit"><span id="fileHint" class="small-note"></span><button id="translateFile" type="submit" class="primary-button">Traducir archivo ↗</button></div>
+        </form>
+        <div id="fileProgress" class="progress-note" role="status" hidden><span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span id="progressText"></span></div>
+        <section id="fileResult" class="file-result" hidden aria-label="Resultado de traducción"><div class="result-toolbar"><h2>Un mensaje, dos idiomas.</h2><button id="downloadResult" class="quiet-button">↓ Descargar texto</button></div><div id="resultContent"></div><div id="speechResult" hidden><p class="small-note">Traducción hablada · voz generada por IA</p><audio id="translatedAudio" controls aria-label="Traducción hablada"></audio><button id="retrySpeech" class="secondary-button" hidden>Generar voz</button></div><div id="imageComparison" hidden><div class="row g-3"><figure class="col-12 col-md-6"><img id="originalImage" alt="Imagen original"><figcaption>Original</figcaption></figure><figure id="editedFigure" class="col-12 col-md-6" hidden><img id="editedImage" alt="Imagen con el texto traducido por IA"><figcaption>Traducción visual · generada por IA</figcaption></figure></div><button id="editImage" class="secondary-button">✳ Generar imagen traducida</button><a id="downloadImage" class="secondary-button" download="nexo-imagen-traducida.jpg" hidden>↓ Descargar imagen</a><p class="small-note">La IA intenta conservar el diseño, pero puede modificar detalles. Revisa el texto antes de usar la imagen.</p></div></section>
+      </section>
+    </div>
+    <div id="status" class="status-bar" role="status" aria-live="polite">Listo para conectar ideas.</div>
+    <footer class="workspace-footer">Tu contenido se envía a OpenAI para procesarlo. Evita datos sensibles. <span>Historial solo en esta pestaña.</span><span class="mobile-author">Alonso Ramírez G. · ITP</span></footer>
+  </main>
+  <dialog id="connectionDialog"><form id="connectionForm"><div class="dialog-heading"><h2>Conexión</h2><button id="closeConnection" type="button" class="quiet-button" aria-label="Cerrar">×</button></div><p>Conecta con el servidor de Nexo Traduce.</p><label for="backendUrl">Dirección del backend</label><input id="backendUrl" type="url" required placeholder="https://tu-proyecto.vercel.app"><label for="accessCode">Código de acceso (si el servidor lo solicita)</label><input id="accessCode" type="password" autocomplete="off"><p class="small-note">Este código no es la API key de OpenAI. Se mantiene solo en memoria.</p><button type="submit" class="primary-button">Guardar y comprobar</button><p id="connectionStatus" role="status"></p></form></dialog>
+  <script src="assets/js/config.js"></script><script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
