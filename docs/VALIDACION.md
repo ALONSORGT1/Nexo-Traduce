@@ -40,4 +40,8 @@ Los archivos de prueba reales están en `tmp/`, fuera del repositorio. No se usa
 
 Repositorio creado y commits progresivos subidos. GitHub Pages configurado para GitHub Actions. La primera ejecución de publicación se inició antes de habilitar Pages; posteriormente se configuró Pages y el commit `2b14e2a` pasó tanto pruebas como publicación. Frontend: https://alonsorgt1.github.io/Nexo-Traduce/.
 
-Vercel exige conceder a su integración existente acceso al repositorio nuevo. GitHub solicita verificación de identidad del propietario para ese cambio; pendiente de completar por el propietario. Hasta conectar y desplegar el backend, la aplicación funciona localmente con `scripts/serve.py`.
+El propietario completó la verificación de GitHub y concedió acceso al repositorio. Backend publicado en https://nexo-traduce.vercel.app/ con preset Flask y variables privadas. El frontend de Pages se conectó al backend en el commit `f9d5f8d`. Se versionó la URL del archivo de configuración para evitar que navegadores que ya visitaron la página reutilicen la configuración local anterior.
+
+### Pruebas en producción
+
+Con el origen de GitHub Pages, respondieron HTTP 200 y CORS correcto: chat ES→EN, chat EN→ES, documento TXT, transcripción de MP3, traducción del audio, generación de voz, lectura de imagen y edición visual. Un origen ajeno recibió HTTP 403. La ruta `/.env.local` recibió HTTP 404. `GET /api/health` confirmó la configuración privada disponible.

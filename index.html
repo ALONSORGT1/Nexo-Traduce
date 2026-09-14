@@ -69,6 +69,6 @@
     <footer class="workspace-footer">Tu contenido se envía a OpenAI para procesarlo. Evita datos sensibles. <span>Historial solo en esta pestaña.</span><span class="mobile-author">Alonso Ramírez G. · ITP</span></footer>
   </main>
   <dialog id="connectionDialog"><form id="connectionForm"><div class="dialog-heading"><h2>Conexión</h2><button id="closeConnection" type="button" class="quiet-button" aria-label="Cerrar">×</button></div><p>Conecta con el servidor de Nexo Traduce.</p><label for="backendUrl">Dirección del backend</label><input id="backendUrl" type="url" required placeholder="https://tu-proyecto.vercel.app"><label for="accessCode">Código de acceso (si el servidor lo solicita)</label><input id="accessCode" type="password" autocomplete="off"><p class="small-note">Este código no es la API key de OpenAI. Se mantiene solo en memoria.</p><button type="submit" class="primary-button">Guardar y comprobar</button><p id="connectionStatus" role="status"></p></form></dialog>
-  <script src="assets/js/config.js"></script><script type="module" src="assets/js/app.js"></script>
+  <script src="assets/js/config.js?v=production-1"></script><script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
