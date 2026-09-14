@@ -16,6 +16,7 @@ export class ChatController {
     });
     document.querySelector('#speaker').addEventListener('change', () => this.updateSpeaker());
     document.querySelector('#clearChat').addEventListener('click', () => this.clear());
+    document.querySelector('#mobileClear').addEventListener('click', () => this.clear());
     document.querySelector('#exportChat').addEventListener('click', () => download(
       this.history.map(x => `${x.sender}\nOriginal (${x.source}):\n${x.original}\n\nTraducción (${x.target}):\n${x.translation}`).join('\n\n———\n\n'),
       'nexo-conversacion.txt'));
@@ -54,6 +55,7 @@ export class ChatController {
   lock(busy) {
     this.form.querySelectorAll('button, textarea, select').forEach(x => x.disabled = busy);
     document.querySelector('#clearChat').disabled = busy;
+    document.querySelector('#mobileClear').disabled = busy;
     document.querySelector('#sendMessage').textContent = busy ? 'Traduciendo…' : 'Traducir ↗';
     document.querySelector('#chatLog').setAttribute('aria-busy', String(busy));
   }

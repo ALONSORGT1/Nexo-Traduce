@@ -80,6 +80,12 @@ export class FileController {
     if (!this.file) return this.notify('Selecciona un archivo antes de traducir.', true);
     this.lock(true); this.progress('Enviando y procesando el archivo…');
     document.querySelector('#fileResult').hidden = true;
+    document.querySelector('#translatedAudio').pause();
+    document.querySelector('#translatedAudio').removeAttribute('src');
+    document.querySelector('#editedFigure').hidden = true;
+    document.querySelector('#downloadImage').hidden = true;
+    document.querySelector('#editedImage').removeAttribute('src');
+    document.querySelector('#downloadImage').removeAttribute('href');
     const langs = this.languages();
     try {
       let result;
@@ -140,6 +146,7 @@ export class FileController {
     if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return this.notify('La grabación requiere HTTPS y un navegador compatible. Puedes subir un audio.', true);
     const button = document.querySelector('#recordButton');
     button.disabled = true;
+    this.recording = true;
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const type = ['audio/webm;codecs=opus', 'audio/mp4'].find(x => MediaRecorder.isTypeSupported(x));
@@ -159,7 +166,7 @@ export class FileController {
       document.querySelectorAll('#fileInput, #translateFile, #removeFile').forEach(x => x.disabled = true);
       let seconds = 0; document.querySelector('#recordStatus').textContent = 'Grabando · 0 / 60 s';
       this.recordTimer = setInterval(() => { seconds++; document.querySelector('#recordStatus').textContent = `Grabando · ${seconds} / 60 s`; if (seconds >= 60) this.stopRecording(); }, 1000);
-    } catch (error) { this.notify(error.name === 'NotAllowedError' ? 'No se permitió el micrófono. Habilítalo o sube un audio.' : error.message, true); }
+    } catch (error) { this.recording = false; this.stream?.getTracks().forEach(track => track.stop()); this.notify(error.name === 'NotAllowedError' ? 'No se permitió el micrófono. Habilítalo o sube un audio.' : error.message, true); }
     finally { button.disabled = false; }
   }
   async editImage() {

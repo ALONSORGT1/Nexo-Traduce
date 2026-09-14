@@ -25,5 +25,7 @@ Una plataforma Español ↔ Inglés con identidad visual de Nexo, accesible desd
 - CORS no equivale a autenticación. Código de acceso opcional y límites de gasto recomendados para publicación.
 - Pruebas automatizadas con dobles de OpenAI comprueban contratos, no calidad de traducción. Las pruebas reales se reportarán por separado.
 
-## Pendientes externos iniciales
-Ubicación de la clave incompleta en la solicitud. Credenciales y acceso de publicación por verificar.
+## Estado de implementación
+Los cinco bloques de código están implementados y versionados. Pruebas automatizadas y llamadas reales a OpenAI aprobadas; resultados en `VALIDACION.md`.
+
+La configuración privada fue reutilizada desde el origen empleado por Identificación de Patrones, con autorización del propietario. GitHub creado; publicación de Pages configurada. Para importar el backend en Vercel falta verificar identidad en GitHub y autorizar el nuevo repositorio en la integración existente.
