@@ -162,5 +162,18 @@ export class FileController {
     } catch (error) { this.notify(error.name === 'NotAllowedError' ? 'No se permitió el micrófono. Habilítalo o sube un audio.' : error.message, true); }
     finally { button.disabled = false; }
   }
-  async editImage() { this.notify('La edición visual se está preparando.'); }
+  async editImage() {
+    if (this.busy || !this.file || !this.results.length) return;
+    this.lock(true); this.progress('Generando la imagen traducida. Esto puede tardar unos minutos…');
+    try {
+      const text = this.results[0];
+      const result = await this.api.request('image-edit', { source: text.source, target: text.target, original: text.original, translation: text.translation }, this.file);
+      document.querySelector('#editedImage').src = result.image;
+      document.querySelector('#editedFigure').hidden = false;
+      document.querySelector('#downloadImage').href = result.image;
+      document.querySelector('#downloadImage').hidden = false;
+      this.notify('Imagen traducida lista. Revisa el texto y los detalles antes de descargar.');
+    } catch (error) { this.notify('La traducción textual se conserva. ' + error.message, true); }
+    finally { this.lock(false); }
+  }
 }

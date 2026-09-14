@@ -139,6 +139,20 @@ def create_app(service=None):
             raise AppError('La solicitud debe ser un objeto JSON.')
         return jsonify(translator.speech(text_input(data, 12000)))
 
+    @app.post('/api/images')
+    def image():
+        source, target = languages(request.form)
+        data, _ = uploads.read(request.files.get('file'), 'images')
+        return jsonify(translator.image_translation(data, source, target))
+
+    @app.post('/api/image-edit')
+    def image_edit():
+        _, target = languages(request.form)
+        original = text_input({'text': request.form.get('original')}, 12000)
+        translation = text_input({'text': request.form.get('translation')}, 12000)
+        data, _ = uploads.read(request.files.get('file'), 'images')
+        return jsonify(translator.edit_image(data, target, original, translation))
+
     @app.get('/')
     def home():
         return send_from_directory(ROOT, 'index.html')
