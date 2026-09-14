@@ -28,4 +28,4 @@ Una plataforma Español ↔ Inglés con identidad visual de Nexo, accesible desd
 ## Estado de implementación
 Los cinco bloques de código están implementados y versionados. Pruebas automatizadas y llamadas reales a OpenAI aprobadas; resultados en `VALIDACION.md`.
 
-La configuración privada fue reutilizada desde el origen empleado por Identificación de Patrones, con autorización del propietario. GitHub creado; publicación de Pages configurada. Para importar el backend en Vercel falta verificar identidad en GitHub y autorizar el nuevo repositorio en la integración existente.
+La configuración privada fue reutilizada desde el origen empleado por Identificación de Patrones, con autorización del propietario. GitHub Pages publicado y backend Flask desplegado en Vercel. El propietario completó la verificación de GitHub y habilitó el repositorio en la integración. El frontend apunta al backend público y conserva el servidor local para desarrollo.

@@ -7,8 +7,8 @@ Permite que personas de México y Estados Unidos compartan mensajes, voz, docume
 ## Acceso
 
 - Repositorio: https://github.com/ALONSORGT1/Nexo-Traduce
-- Frontend publicado: https://alonsorgt1.github.io/Nexo-Traduce/ (backend público pendiente de conectar).
-- Backend: publicación en Vercel en preparación.
+- Aplicación pública: https://alonsorgt1.github.io/Nexo-Traduce/
+- Aplicación y backend en Vercel: https://nexo-traduce.vercel.app/
 
 ## Funciones
 
