@@ -29,8 +29,11 @@ Los archivos de prueba reales están en `tmp/`, fuera del repositorio. No se usa
 
 - Chat probado con envío real desde la UI; original y traducción visibles.
 - Audio cargado desde la UI; transcripción, traducción y controles de reproducción de ambos audios visibles.
+- Imagen cargada desde la UI en modo móvil; traducción textual y generación real de la imagen traducida completadas; enlace de descarga visible. Tema oscuro comprobado.
 - Revisión visual de escritorio 1280 × 720, tableta 768 × 1024 y teléfono 390 × 844.
 - En teléfono, ancho del documento de 390 px sobre viewport de 390 px: sin desbordamiento horizontal; botón de envío dentro de pantalla.
+- Revisión adicional a 320 × 740: se corrigió la navegación colocando iconos sobre etiquetas; ancho final del documento de 320 px, sin desbordamiento. Tema oscuro legible.
+- La imagen generada se decodificó en el navegador a 1536 px; el enlace contiene un JPG válido y nombre de descarga. El navegador integrado no confirmó el evento de descarga, por lo que no se afirma haber verificado un archivo descargado desde esa UI.
 - La grabación física del micrófono no se probó para evitar capturar conversaciones del entorno. El flujo de audio sí se validó con archivo sintético real.
 
 ## Publicación

@@ -8,4 +8,5 @@
 @media(max-height:720px) and (min-width:651px){.sidebar-note{padding:16px 0}.sidebar-note h2{font-size:18px}.sidebar-note p,.language-chip{display:none}.welcome{padding-top:20px}.welcome h1{font-size:44px;margin-block:15px}.welcome-symbol{top:55px}.suggestion-grid{margin-top:18px}.composer textarea{min-height:55px}.topbar{height:62px}}
 .mobile-clear{display:none}
 @media(max-width:650px){.mobile-clear{display:inline-block;font-size:20px}.header-actions{gap:0}.topbar-title{gap:7px}}
+@media(max-width:360px){.mode-nav{gap:3px;padding:7px 9px}.mode-button{flex-direction:column;gap:5px;padding:8px 3px;font-size:9px;min-width:0}.mode-button>span:first-child{font-size:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
